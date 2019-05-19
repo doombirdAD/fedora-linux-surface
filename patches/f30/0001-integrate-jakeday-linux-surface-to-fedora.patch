@@ -1,0 +1,176 @@
+From be874e1c4b74acf7b2788c9b9976c9f9a5d6b854 Mon Sep 17 00:00:00 2001
+From: Tony Kelly <apatheticelation+github@gmail.com>
+Date: Sun, 19 May 2019 15:49:02 -0500
+Subject: [PATCH] integrate jakeday linux-surface to fedora
+
+---
+ configs/fedora/generic/CONFIG_MWLWIFI               |  1 +
+ .../fedora/generic/CONFIG_SURFACE_3_POWER_OPREGION  |  1 +
+ configs/fedora/generic/CONFIG_SURFACE_ACPI          |  1 +
+ configs/fedora/generic/x86/CONFIG_INTEL_IPTS        |  1 +
+ configs/fedora/generic/x86/CONFIG_MWLWIFI           |  1 +
+ configs/fedora/generic/x86/x86_64/CONFIG_INTEL_IPTS |  1 +
+ .../x86/x86_64/CONFIG_SURFACE_3_POWER_OPREGION      |  1 +
+ .../fedora/generic/x86/x86_64/CONFIG_SURFACE_ACPI   |  1 +
+ .../generic/x86/x86_64/CONFIG_SURFACE_ACPI_DTX      |  1 +
+ .../generic/x86/x86_64/CONFIG_SURFACE_ACPI_SAN      |  1 +
+ .../generic/x86/x86_64/CONFIG_SURFACE_ACPI_SID      |  1 +
+ .../generic/x86/x86_64/CONFIG_SURFACE_ACPI_SSH      |  1 +
+ .../x86/x86_64/CONFIG_SURFACE_ACPI_SSH_DEBUG_DEVICE |  1 +
+ .../generic/x86/x86_64/CONFIG_SURFACE_ACPI_VHF      |  1 +
+ filter-modules.sh                                   |  2 +-
+ kernel.spec                                         | 13 +++++++++++++
+ 16 files changed, 28 insertions(+), 1 deletion(-)
+ create mode 100644 configs/fedora/generic/CONFIG_MWLWIFI
+ create mode 100644 configs/fedora/generic/CONFIG_SURFACE_3_POWER_OPREGION
+ create mode 100644 configs/fedora/generic/CONFIG_SURFACE_ACPI
+ create mode 100644 configs/fedora/generic/x86/CONFIG_INTEL_IPTS
+ create mode 100644 configs/fedora/generic/x86/CONFIG_MWLWIFI
+ create mode 100644 configs/fedora/generic/x86/x86_64/CONFIG_INTEL_IPTS
+ create mode 100644 configs/fedora/generic/x86/x86_64/CONFIG_SURFACE_3_POWER_OPREGION
+ create mode 100644 configs/fedora/generic/x86/x86_64/CONFIG_SURFACE_ACPI
+ create mode 100644 configs/fedora/generic/x86/x86_64/CONFIG_SURFACE_ACPI_DTX
+ create mode 100644 configs/fedora/generic/x86/x86_64/CONFIG_SURFACE_ACPI_SAN
+ create mode 100644 configs/fedora/generic/x86/x86_64/CONFIG_SURFACE_ACPI_SID
+ create mode 100644 configs/fedora/generic/x86/x86_64/CONFIG_SURFACE_ACPI_SSH
+ create mode 100644 configs/fedora/generic/x86/x86_64/CONFIG_SURFACE_ACPI_SSH_DEBUG_DEVICE
+ create mode 100644 configs/fedora/generic/x86/x86_64/CONFIG_SURFACE_ACPI_VHF
+
+diff --git a/configs/fedora/generic/CONFIG_MWLWIFI b/configs/fedora/generic/CONFIG_MWLWIFI
+new file mode 100644
+index 000000000..107d0d799
+--- /dev/null
++++ b/configs/fedora/generic/CONFIG_MWLWIFI
+@@ -0,0 +1 @@
++# CONFIG_MWLWIFI is not set
+diff --git a/configs/fedora/generic/CONFIG_SURFACE_3_POWER_OPREGION b/configs/fedora/generic/CONFIG_SURFACE_3_POWER_OPREGION
+new file mode 100644
+index 000000000..aaa37ad19
+--- /dev/null
++++ b/configs/fedora/generic/CONFIG_SURFACE_3_POWER_OPREGION
+@@ -0,0 +1 @@
++# CONFIG_SURFACE_3_POWER_OPREGION is not set
+diff --git a/configs/fedora/generic/CONFIG_SURFACE_ACPI b/configs/fedora/generic/CONFIG_SURFACE_ACPI
+new file mode 100644
+index 000000000..c362eee49
+--- /dev/null
++++ b/configs/fedora/generic/CONFIG_SURFACE_ACPI
+@@ -0,0 +1 @@
++# CONFIG_SURFACE_ACPI is not set
+diff --git a/configs/fedora/generic/x86/CONFIG_INTEL_IPTS b/configs/fedora/generic/x86/CONFIG_INTEL_IPTS
+new file mode 100644
+index 000000000..a33e033db
+--- /dev/null
++++ b/configs/fedora/generic/x86/CONFIG_INTEL_IPTS
+@@ -0,0 +1 @@
++CONFIG_INTEL_IPTS=m
+diff --git a/configs/fedora/generic/x86/CONFIG_MWLWIFI b/configs/fedora/generic/x86/CONFIG_MWLWIFI
+new file mode 100644
+index 000000000..422bbec56
+--- /dev/null
++++ b/configs/fedora/generic/x86/CONFIG_MWLWIFI
+@@ -0,0 +1 @@
++CONFIG_MWLWIFI=m
+diff --git a/configs/fedora/generic/x86/x86_64/CONFIG_INTEL_IPTS b/configs/fedora/generic/x86/x86_64/CONFIG_INTEL_IPTS
+new file mode 100644
+index 000000000..a33e033db
+--- /dev/null
++++ b/configs/fedora/generic/x86/x86_64/CONFIG_INTEL_IPTS
+@@ -0,0 +1 @@
++CONFIG_INTEL_IPTS=m
+diff --git a/configs/fedora/generic/x86/x86_64/CONFIG_SURFACE_3_POWER_OPREGION b/configs/fedora/generic/x86/x86_64/CONFIG_SURFACE_3_POWER_OPREGION
+new file mode 100644
+index 000000000..75e17ac02
+--- /dev/null
++++ b/configs/fedora/generic/x86/x86_64/CONFIG_SURFACE_3_POWER_OPREGION
+@@ -0,0 +1 @@
++CONFIG_SURFACE_3_POWER_OPREGION=m
+diff --git a/configs/fedora/generic/x86/x86_64/CONFIG_SURFACE_ACPI b/configs/fedora/generic/x86/x86_64/CONFIG_SURFACE_ACPI
+new file mode 100644
+index 000000000..150aa2abd
+--- /dev/null
++++ b/configs/fedora/generic/x86/x86_64/CONFIG_SURFACE_ACPI
+@@ -0,0 +1 @@
++CONFIG_SURFACE_ACPI=m
+diff --git a/configs/fedora/generic/x86/x86_64/CONFIG_SURFACE_ACPI_DTX b/configs/fedora/generic/x86/x86_64/CONFIG_SURFACE_ACPI_DTX
+new file mode 100644
+index 000000000..54f4bcd1e
+--- /dev/null
++++ b/configs/fedora/generic/x86/x86_64/CONFIG_SURFACE_ACPI_DTX
+@@ -0,0 +1 @@
++CONFIG_SURFACE_ACPI_DTX=y
+diff --git a/configs/fedora/generic/x86/x86_64/CONFIG_SURFACE_ACPI_SAN b/configs/fedora/generic/x86/x86_64/CONFIG_SURFACE_ACPI_SAN
+new file mode 100644
+index 000000000..324fe550a
+--- /dev/null
++++ b/configs/fedora/generic/x86/x86_64/CONFIG_SURFACE_ACPI_SAN
+@@ -0,0 +1 @@
++CONFIG_SURFACE_ACPI_SAN=y
+diff --git a/configs/fedora/generic/x86/x86_64/CONFIG_SURFACE_ACPI_SID b/configs/fedora/generic/x86/x86_64/CONFIG_SURFACE_ACPI_SID
+new file mode 100644
+index 000000000..9f1ba7d96
+--- /dev/null
++++ b/configs/fedora/generic/x86/x86_64/CONFIG_SURFACE_ACPI_SID
+@@ -0,0 +1 @@
++CONFIG_SURFACE_ACPI_SID=y
+diff --git a/configs/fedora/generic/x86/x86_64/CONFIG_SURFACE_ACPI_SSH b/configs/fedora/generic/x86/x86_64/CONFIG_SURFACE_ACPI_SSH
+new file mode 100644
+index 000000000..651d36983
+--- /dev/null
++++ b/configs/fedora/generic/x86/x86_64/CONFIG_SURFACE_ACPI_SSH
+@@ -0,0 +1 @@
++CONFIG_SURFACE_ACPI_SSH=y
+diff --git a/configs/fedora/generic/x86/x86_64/CONFIG_SURFACE_ACPI_SSH_DEBUG_DEVICE b/configs/fedora/generic/x86/x86_64/CONFIG_SURFACE_ACPI_SSH_DEBUG_DEVICE
+new file mode 100644
+index 000000000..b1e884b55
+--- /dev/null
++++ b/configs/fedora/generic/x86/x86_64/CONFIG_SURFACE_ACPI_SSH_DEBUG_DEVICE
+@@ -0,0 +1 @@
++# CONFIG_SURFACE_ACPI_SSH_DEBUG_DEVICE is not set
+diff --git a/configs/fedora/generic/x86/x86_64/CONFIG_SURFACE_ACPI_VHF b/configs/fedora/generic/x86/x86_64/CONFIG_SURFACE_ACPI_VHF
+new file mode 100644
+index 000000000..2f4459f7e
+--- /dev/null
++++ b/configs/fedora/generic/x86/x86_64/CONFIG_SURFACE_ACPI_VHF
+@@ -0,0 +1 @@
++CONFIG_SURFACE_ACPI_VHF=y
+diff --git a/filter-modules.sh b/filter-modules.sh
+index eb246e157..7c3d9d451 100755
+--- a/filter-modules.sh
++++ b/filter-modules.sh
+@@ -36,7 +36,7 @@ drmdrvs="amd ast bridge gma500 i2c i915 mgag200 nouveau panel radeon"
+ 
+ iiodrvs="accel adc afe common dac gyro health humidity light magnetometer multiplexer orientation potentiometer potentiostat pressure temperature"
+ 
+-singlemods="ntb_netdev iscsi_ibft iscsi_boot_sysfs megaraid pmcraid qedi qla1280 9pnet_rdma rpcrdma nvmet-rdma nvme-rdma hid-picolcd hid-prodikeys hwa-hc hwpoison-inject target_core_user sbp_target cxgbit iw_cxgb3 iw_cxgb4 cxgb3i cxgb3i cxgb3i_ddp cxgb4i chcr chtls parport_serial regmap-sdw hid-asus"
++singlemods="ntb_netdev iscsi_ibft iscsi_boot_sysfs megaraid pmcraid qedi qla1280 9pnet_rdma rpcrdma nvmet-rdma nvme-rdma hid-picolcd hid-prodikeys hwa-hc hwpoison-inject target_core_user sbp_target cxgbit iw_cxgb3 iw_cxgb4 cxgb3i cxgb3i cxgb3i_ddp cxgb4i chcr chtls parport_serial regmap-sdw hid-asus intel-ipts"
+ 
+ # Grab the arch-specific filter list overrides
+ source ./filter-$2.sh
+diff --git a/kernel.spec b/kernel.spec
+index c107407a4..5e202e976 100644
+--- a/kernel.spec
++++ b/kernel.spec
+@@ -640,6 +640,19 @@ Patch525: 0001-platform-x86-ideapad-laptop-Remove-no_hw_rfkill_list.patch
+ 
+ # END OF PATCH DEFINITIONS
+ 
++Patch10001: 0001-surface-acpi.patch
++Patch10002: 0002-suspend.patch
++Patch10003: 0003-buttons.patch
++Patch10004: 0004-cameras.patch
++Patch10005: 0005-ipts.patch
++Patch10006: 0006-hid.patch
++Patch10007: 0007-sdcard-reader.patch
++Patch10008: 0008-wifi.patch
++Patch10009: 0009-surface-power.patch
++Patch10010: 0010-surface-dock.patch
++Patch10011: 0011-mwlwifi.patch
++Patch10012: 0012-surface-lte.patch
++
+ %endif
+ 
+ 
+-- 
+2.21.0
+

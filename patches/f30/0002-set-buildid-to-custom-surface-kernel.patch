@@ -1,0 +1,25 @@
+From 0fd162f604a9d1570a66d41d7f031bbefd1cd73b Mon Sep 17 00:00:00 2001
+From: Tony Kelly <apatheticelation+github@gmail.com>
+Date: Sun, 19 May 2019 15:55:17 -0500
+Subject: [PATCH 2/2] set buildid to custom surface kernel.
+
+---
+ kernel.spec | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/kernel.spec b/kernel.spec
+index 5e202e976..e993a00be 100644
+--- a/kernel.spec
++++ b/kernel.spec
+@@ -24,7 +24,7 @@ Summary: The Linux kernel
+ %global zipsed -e 's/\.ko$/\.ko.xz/'
+ %endif
+ 
+-# define buildid .local
++%define buildid .surface
+ 
+ # baserelease defines which build revision of this kernel version we're
+ # building.  We used to call this fedora_build, but the magical name
+-- 
+2.21.0
+
