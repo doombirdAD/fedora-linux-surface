@@ -17,10 +17,10 @@ esac
 fedpkg clone -a kernel
 cd kernel
 
-# check out origin/$RELEASE
+# check out $RELEASE
 git checkout ${RELEASE}
 
-## Get kernel version (needed to figure out correct patches to pull from jakeday)
+## Get kernel Maj.min version (needed to figure out correct patches to pull from jakeday)
 KERNELVER=$(fedpkg verrel | sed -e 's/^kernel-\([^.]*\)\.\([^.]*\)\..*$/\1.\2/')
 
 
