@@ -38,3 +38,17 @@ The script will
 5. run the `fedpkg --release <release> local` to build the kernel packages locally.
 
 The process will take several hours to completely compile and package the new kernel build.  Once the script is done, the RPMs will be in the rpms subdirectory, with ".surface" added to the version string to distinguish them from official released packages.
+
+## To Do:
+In no particular order,
+
+0. Check space before downloading kernel source
+0. setup script interactive: ask to auto-install kernel
+0. Host published packages (not everyone is interested in building a kernel from scratch.)
+0. Automate inclusion of firmware from jakeday's repo (create .rpm for firmware versions, maybe?)
+0. Automate inclusion of config files from jakeday
+0. Automate inclusion of xorg/pulse configs from jakeday
+0. Futzing with suspend/hibernate
+0. Better documentation
+0. Sanity checks in setup script
+0. Dockerfile to allow building on vanilla Fedora container
