@@ -1,43 +1,71 @@
 #!/bin/bash
 
-# Get argument, set as RELEASE and enforce it's one of f{29,30,31} (more will be supported later.)
+# Figure out where and what we are
+if [[ ! -e /etc/os-release ]]; then
+  echo "Missing fedora-release-common package or not a Fedora install, exiting."
+  exit 3
+fi
 
-case $1 in
-	/29|f29|F29/) RELEASE="f29";;
-	/30|f30|F30/) RELEASE="f30";;
-	/31|f31|F31/) RELEASE="f31";;
-	*)
-		echo "Unsupported release version $1."
-		exit 3
-		;;
-esac
+. /etc/os-release
 
-# clone Fedora kernel repository
-## TODO: The Fedora repo plus the kernel repo is 25+ GiB.  Make sure we have space
+RELEASE="f${VERSION_ID}"
+if [[ ! -d patches/${RELEASE} ]]; then
+  echo "${RELEASE} is not currently supported."
+  echo "Currently supported versions are:"
+  ls patches
+  exit 3
+fi
+
+echo "Building kernel for Fedora ${RELEASE}.\n"
+sleep 3
+
+# CLONE REPOSITORIES
+
+cd build
+
+## clone jakeday/linux-surface
+git clone https://github.com/jakeday/linux-surface
+
+## clone Fedora kernel repository
+## (We use fedpkg to manage practically every aspect of package building 
+## on Fedora.)
+
+
+## TODO: The Fedora repo plus the kernel repo is 25+ GiB.  
+## Make sure we have space
 fedpkg clone -a kernel
+
+## BUILD KERNEL PACKAGES
+
 cd kernel
 
-# check out $RELEASE
-git checkout ${RELEASE}
+# create local branch $RELEASE and set it to track origin/${RELEASE}
+git checkout -b ${RELEASE}
 
-## Get kernel Maj.min version (needed to figure out correct patches to pull from jakeday)
-KERNELVER=$(fedpkg verrel | sed -e 's/^kernel-\([^.]*\)\.\([^.]*\)\..*$/\1.\2/')
+## Get kernel Maj.min version 
+## (needed to figure out correct patches to pull from jakeday repo)
+KERNELVER=$(fedpkg verrel | \
+  sed -e 's/^kernel-\([^.]*\)\.\([^.]*\)\..*$/\1.\2/')
 
-
-# Clone jakeday/linux-surface to get latest matching patches
-git clone https://github.com/jakeday/linux-surface
 ## Move jakeday patches to local directory
-cp linux-surface/patches/${KERNELVER}/*.patch .
+cp ../linux-surface/patches/${KERNELVER}/*.patch .
 
-# Apply my patches to Fedora repository
+##  Apply our patches to Fedora repository
 git am ../patches/${RELEASE}/*.patch
 
-# Build new configs
+## Build new configs based off of the changes to the config file tree
 configs/build_configs.sh
 
-# run `fedpkg --release $RELEASE local`
+## run the fedpkg command which will build the kernel packages
 fedpkg --release ${RELEASE} local
 
 # Copy RPMs to rpm/ directory
 cd ../
 mv kernel/x86_64/*.rpm rpms/
+
+## TODO: Collect firmware packages from jakeday/linux-surface 
+## into rpm packages.
+#for file in specsfiles/*.spec; do
+#  rpmbuild --define '_topdir build/rpmbuild' -ba $file
+#done
+	
