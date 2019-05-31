@@ -3,7 +3,9 @@ Fedora Linux kernel patching scripts and procedures for MS Surface devices based
 
 This is a repostitory hosting the scripts and information one would need to run on Fedora Linux to build and install a kernel for the MS Surface line of tablets and laptops.  
 
-While the Jake Day scripts work well to build for Ubuntu/Debian flavors, the way Fedora packages it's kernel can cause issues.  Fedora uses much smaller images, so the typical Fedora install will have a correspondingly smaller /boot partition.  If a user tries to install multiple kernels using the typcal kernel build process, it will quickly run /boot out of space.  I created this repository and script set to incorporate Jake Day's work on the kernel for Surface devices into the standard Fedora build process so that the system can treat those kernels the same as it would any other maintained kernel package.
+While the Jake Day scripts work well to build for Ubuntu/Debian and for once off generic kernels, the way Fedora packages its kernel can cause issues.  Fedora uses much smaller images, so the typical Fedora install will have a correspondingly smaller /boot partition.  If a user tries to install multiple kernels using the typcal kernel build process, it will quickly run /boot out of space.  Furthermore, trying to manage updated kernel packages from DNF/yum alongside custom built and manualy installed kernels is a drag.  
+
+I created this repository and script set to incorporate Jake Day's work on the kernel for Surface devices into the standard Fedora build process so that the system can treat those kernels the same as it would any other maintained kernel package.
 
 Currently under construction.
 
@@ -42,13 +44,13 @@ The process will take several hours to completely compile and package the new ke
 ## To Do:
 In no particular order,
 
-0. Check space before downloading kernel source
-0. setup script interactive: ask to auto-install kernel
-0. Host published packages (not everyone is interested in building a kernel from scratch.)
-0. Automate inclusion of firmware from jakeday's repo (create .rpm for firmware versions, maybe?)
-0. Automate inclusion of config files from jakeday
-0. Automate inclusion of xorg/pulse configs from jakeday
-0. Futzing with suspend/hibernate
-0. Better documentation
-0. Sanity checks in setup script
-0. Dockerfile to allow building on vanilla Fedora container
+1. Manage space when downloading kernel source (check free space, shallow clone, etc)
+1. setup script interactive: ask to auto-install kernel
+1. Host published packages (not everyone is interested in building a kernel from scratch.)
+1. Automate inclusion of firmware from jakeday's repo (create .rpm for firmware versions, maybe?)
+1. Automate inclusion of config files from jakeday
+1. Automate inclusion of xorg/pulse configs from jakeday
+1. Futzing with suspend/hibernate
+1. Better documentation
+1. Sanity checks in setup script
+1. Dockerfile to allow building on vanilla Fedora container
