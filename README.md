@@ -14,7 +14,7 @@ Currently under construction.
 Firstly, you'll want to make sure your Fedora installation is prepared to build using the Fedora build system.
 
 ```
-dnf install fedpkg fedora-packager rpmdevtools ncurses-devel pesign
+dnf install -y fedpkg fedora-packager rpmdevtools ncurses-devel pesign
 ```
 
 Clone this repository locally
@@ -26,11 +26,11 @@ cd fedora-linux-surface
 
 ## Building
 
-To build, run the setup script with the version of Fedora you want to build, i.e.
+To build, run the setup script
 ```
-./setup.sh f30
+bash ./setup.sh
 ```
-to build the branch for Fedora 30.
+to build the branch for your current version of Fedora.
 
 The script will 
 1. clone the kernel from the Fedora Project GIT repository
